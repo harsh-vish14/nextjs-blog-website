@@ -5,12 +5,16 @@ const PostDetail = (props) => {
   return <PostContent post={props.data} />;
 };
 
-export const getStaticProps = (context) => {
+export const getStaticProps = async (context) => {
   const { params } = context;
   const { postSlug } = params;
 
-  const data = getPostData(postSlug);
-
+  const data = await getPostData(postSlug);
+  if (!data) {
+    return {
+      notFound: true
+    }
+  }
   return {
     props: {
       data,
