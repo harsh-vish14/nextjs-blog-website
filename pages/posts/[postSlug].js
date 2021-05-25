@@ -1,6 +1,5 @@
-import { getPageFiles } from "next/dist/next-server/server/get-page-files";
 import PostContent from "../../components/post/post-details/post-content";
-import { getPostData } from "../../lib/post-util";
+import { getPostData, getPageFiles } from "../../lib/post-util";
 
 const PostDetail = (props) => {
   return <PostContent post={props.data} />;
@@ -11,7 +10,7 @@ export const getStaticProps = async (context) => {
   const { postSlug } = params;
 
   const data = await getPostData(postSlug);
-  
+
   return {
     props: {
       data,
@@ -20,14 +19,13 @@ export const getStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths = (context) => {
+export const getStaticPaths = () => {
   const postFilenames = getPageFiles();
-const slugs = postFilenames.map((fileName) => fileName.replace(/\.md$/, ""));
-
-return {
-  paths: slugs.map((slug) => ({ params: { slug: slug } })),
-  fallback: "blocking",
-};
+  const slugs = postFilenames.map((fileName) => fileName.replace(/\.md$/, ""));
+  return {
+    paths: slugs.map((slug) => ({ params: { postSlug: slug } })),
+    fallback: "blocking",
+  };
 };
 
 export default PostDetail;
