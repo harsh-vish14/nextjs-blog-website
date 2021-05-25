@@ -5,6 +5,8 @@ import Image from "next/image";
 import "github-markdown-css";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Fragment } from "react";
+import Head from "next/head";
 
 // const DUMMY_POST = {
 //   slug: "getting-started-with-nextjs",
@@ -50,12 +52,20 @@ const PostContent = ({ post }) => {
   };
 
   return (
-    <article className={classes.content}>
-      <PostHeader title={post.title} image={imagePath} />
-      <div className="markdown-body">
-        <ReactMarkdown components={customRender}>{post.content}</ReactMarkdown>
-      </div>
-    </article>
+    <Fragment>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.excerpt}></meta>
+      </Head>
+      <article className={classes.content}>
+        <PostHeader title={post.title} image={imagePath} />
+        <div className="markdown-body">
+          <ReactMarkdown components={customRender}>
+            {post.content}
+          </ReactMarkdown>
+        </div>
+      </article>
+    </Fragment>
   );
 };
 
