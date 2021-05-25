@@ -8,8 +8,8 @@ const ContactForm = () => {
   const message = useRef();
   const [showNotifications, setShowNotifications] = useState(false);
   const [notification, setNotification] = useState({
-    title: "",
-    message: "Loading.....",
+    title: "Sending.....",
+    message: "",
     status: "",
   });
   const formHandler = async (e) => {
@@ -55,8 +55,8 @@ const ContactForm = () => {
   const disableNotifications = () => {
     setShowNotifications(false);
     setNotification({
-      title: "",
-      message: "Loading.....",
+      title: "Sending.....",
+      message: "",
       status: "",
     });
   };

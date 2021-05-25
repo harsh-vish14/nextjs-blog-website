@@ -3,20 +3,14 @@ import classes from "./post-content.module.css";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import "github-markdown-css";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import atomDark from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript'
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css'
 import { Fragment } from "react";
 import Head from "next/head";
-
-// const DUMMY_POST = {
-//   slug: "getting-started-with-nextjs",
-//   title: "Getting Started with nextjs",
-//   image: "getting-started-nextjs.png",
-//   excerpt:
-//     "Next Js is a React Framework which Takes react development to next level and We can take care of SEO optimization in Next JS we can do server-side-rending",
-//   date: "2022-05-10",
-//   content: "# This is Title",
-// };
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('css', css);
 const PostContent = ({ post }) => {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 

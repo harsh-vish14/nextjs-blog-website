@@ -62,3 +62,7 @@ button {
   font: inherit;
   cursor: pointer;
 }
+
+#notification {
+  cursor: pointer;
+}
